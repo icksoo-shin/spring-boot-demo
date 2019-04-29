@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Nothing to do in the install phase...
+  pre_build:
+    commands:
+#      - mvn clean test sonar:sonar 
+#        -Dsonar.projectKey=demo 
+#        -Dsonar.host.url=http://ec2-54-180-87-1.ap-northeast-2.compute.amazonaws.com 
+#        -Dsonar.login=9c68af2b5179db817b45b7ff493bceb288ed7784
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn -Dmaven.test.skip=true install # maven build command
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+cache:
+  paths:
+    - '/root/.m2/**/*'
+
+artifacts: # build result configuration
+  files:
+    - target/demo-0.0.1-SNAPSHOT.jar # build result file name and path
+    - appspec.yml # Spec for CodeDeploy
+    - testspec.yml 
+    - scripts/*   # Scripts for CodeDeploy
+    - postman/*
+  discard-paths: yes

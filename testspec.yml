@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - apt-get update -yq 
+      - apt-get install curl gnupg -yq 
+      - curl -sL https://deb.nodesource.com/setup_8.x | bash # nodejs 8.x repository 
+      - apt-get install nodejs -yq # nodejs runtime install
+      - npm install -g newman # postman test tool install
+      - npm install -g newman-reporter-html # test report generator install
+  pre_build:
+    commands:
+      - nohup java -jar ./demo-0.0.1-SNAPSHOT.jar & # launch spring boot app for test
+      - sleep 30  # waiting 30 sec for spring boot launch
+  build:
+    commands:
+      - echo Test started on `date`
+      - newman run -r html,cli ./demo.postman_collection.json --reporter-html-export report.html  # run postman test
+  post_build:
+    commands:
+      - echo Test completed on `date`
+
+artifacts: # build result configuration
+  files:
+    - report.html # test result
+  discard-paths: yes

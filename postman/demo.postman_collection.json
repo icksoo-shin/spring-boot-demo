@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "e044a6ff-5cc2-4046-9cc6-3fd2ce395b32",
+		"name": "demo",
+		"description": "demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "hello_get_ok",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f434092a-a77c-48c0-a026-be9545715572",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Hi foo!!\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080?name=foo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"query": [
+						{
+							"key": "name",
+							"value": "foo"
+						}
+					]
+				},
+				"description": "hello get ok test"
+			},
+			"response": []
+		}
+	]
+}
