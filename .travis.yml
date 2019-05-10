@@ -4,6 +4,8 @@ jdk:
 sudo: false # faster builds
 script: 
   - mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+test:
+  - mvn test
 before_install:
   - chmod +x mvnw
 after_success:
