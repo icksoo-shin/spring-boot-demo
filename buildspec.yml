@@ -2,8 +2,8 @@ version: 0.2
 
 phases:
   install:
-    commands:
-      - echo Nothing to do in the install phase...
+    runtime-versions:
+      java: openjdk8
   pre_build:
     commands:
 #      - mvn clean test sonar:sonar 
@@ -29,4 +29,4 @@ artifacts: # build result configuration
     - testspec.yml 
     - scripts/*   # Scripts for CodeDeploy
     - postman/*
-  discard-paths: yes
+  discard-paths: no

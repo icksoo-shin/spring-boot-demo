@@ -11,12 +11,12 @@ phases:
       - npm install -g newman-reporter-html # test report generator install
   pre_build:
     commands:
-      - nohup java -jar ./demo-0.0.1-SNAPSHOT.jar & # launch spring boot app for test
+      - nohup java -jar target/demo-0.0.1-SNAPSHOT.jar & # launch spring boot app for test
       - sleep 30  # waiting 30 sec for spring boot launch
   build:
     commands:
       - echo Test started on `date`
-      - newman run -r html,cli ./demo.postman_collection.json --reporter-html-export report.html  # run postman test
+      - newman run -r html,cli postman/demo.postman_collection.json --reporter-html-export report.html  # run postman test
   post_build:
     commands:
       - echo Test completed on `date`
@@ -24,4 +24,4 @@ phases:
 artifacts: # build result configuration
   files:
     - report.html # test result
-  discard-paths: yes
+  discard-paths: no

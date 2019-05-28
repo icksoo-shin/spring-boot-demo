@@ -1,9 +1,7 @@
 version: 0.0
 os: linux
 files:
-- source: ./demo-0.0.1-SNAPSHOT.jar
-  destination: /tmp
-- source: ./deploy.sh
+- source: target/demo-0.0.1-SNAPSHOT.jar
   destination: /tmp
 permissions:
 - object: /tmp
@@ -12,7 +10,7 @@ permissions:
   group: ec2-user
 hooks:
   ApplicationStart:
-  - location: deploy.sh
+  - location: scripts/deploy.sh
     timeout: 180
 #  ValidateService:
 #  - location: healthCheck.sh
